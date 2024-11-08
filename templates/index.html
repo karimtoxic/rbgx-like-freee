@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لايكات فري فاير</title>
+    <title>free fire likes web site</title>
     <style>
         * {
             margin: 0;
@@ -139,11 +139,11 @@
                     if (data.success) {
                         showMessage(`تم إرسال 100 لايك بنجاح إلى اللاعب ${data.nickname}.`, 'success');
                     } else {
-                        showMessage('عزيزي المستخدم تم اضافة 100 لايك من قبل', 'error');
+                        showMessage('السيرفر متوقف حاليا رجاء المحاولة لاحقا !', 'error');
                     }
                 })
                 .catch(() => {
-                    showMessage('السيرفر متوقف حاليا رجاء المحاولة لاحقا !', 'error');
+                    showMessage('عزيزي المستخدم تم اضافة 100 لايك من قبل', 'error');
                 });
         });
 
