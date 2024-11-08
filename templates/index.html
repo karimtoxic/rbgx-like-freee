@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لايكات فري فاير</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #f4f5f7;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            border: 2px solid #000; /* إضافة إطار أسود حول المربع */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1), 0px 4px 20px rgba(0, 0, 0, 0.1); /* إضافة الظلال */
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #000; /* إضافة إطار أسود */
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-box:focus {
+            border-color: #007bff; /* تغيير لون الحدود عند التركيز */
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            font-size: 0.9rem;
+            margin-top: 15px;
+            padding: 8px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .message.error {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>free fire likes web</h1>
+        <p>    
+            </p>
+        <p>ادخل الايدي الخاص بك ( الحد اليومي 100 لايك لكل حساب )</p>
+
+        <!-- إدخال UID -->
+        <input type="text" id="uid" class="input-box" placeholder="أدخل UID" />
+
+        <!-- زر الإرسال -->
+        <button class="btn" id="submit-btn">إرسال</button>
+
+        <!-- رسالة تنبيه -->
+        <div id="message" class="message"></div>
+
+        <footer>
+            <p>&copy;rbgx_toxic</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            var uid = document.getElementById('uid').value;
+            var messageElement = document.getElementById('message');
+            messageElement.style.display = 'none';
+
+            if (uid.trim() === '') {
+                showMessage('يرجى إدخال UID صحيح !', 'error');
+                return;
+            }
+
+            // محاكاة استجابة الخادم (تستطيع تعديل هذا الجزء للعمل مع API حقيقي)
+            fetch(`/send_likes/${uid}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showMessage(`تم إرسال 100 لايك بنجاح إلى اللاعب ${data.nickname}.`, 'success');
+                    } else {
+                        showMessage('عزيزي المستخدم تم اضافة 100 لايك من قبل', 'error');
+                    }
+                })
+                .catch(() => {
+                    showMessage('السيرفر متوقف حاليا رجاء المحاولة لاحقا !', 'error');
+                });
+        });
+
+        function showMessage(message, type) {
+            var messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.className = `message ${type}`;
+            messageElement.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
